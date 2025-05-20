@@ -101,7 +101,7 @@ public class Heap {
         heap[second] = temp;
     }
 
-    private Boolean isEmpty() {
+    public Boolean isEmpty() {
         return this.size == 0;
     }
 

@@ -1,20 +1,16 @@
+import java.util.Arrays;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Heap heap = new Heap();
-        heap.insert(15);
-        heap.insert(10);
-        heap.insert(3);
-        heap.insert(8);
-        heap.insert(12);
-        heap.insert(9);
-        heap.insert(4);
-        heap.insert(1);
-        heap.insert(24);
+        int[] numbers = { 5, 3, 10, 1, 4, 2};
+        var heap = new Heap();
+        for (var number: numbers)
+            heap.insert(number);
+        for (var i = numbers.length - 1; i >= 0; i--)
+            numbers[i] = heap.remove();
 
-//        heap.remove();
-
-        System.out.println(heap.toString());
+        System.out.println(Arrays.toString(numbers));
     }
 }
