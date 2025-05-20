@@ -1,3 +1,5 @@
+package heaps;
+
 import java.util.Arrays;
 
 public class Heap {
@@ -6,7 +8,7 @@ public class Heap {
 
     public void insert(int value) {
         if(isFull())
-            throw new IllegalStateException("Heap is full");
+            throw new IllegalStateException("heaps.Heap is full");
 
         this.heap[size++] = value;
 
@@ -15,7 +17,7 @@ public class Heap {
 
     public int remove() {
         if(isEmpty())
-            throw new IllegalStateException("Heap is empty");
+            throw new IllegalStateException("heaps.Heap is empty");
 
         var root = heap[0];
 
