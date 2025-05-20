@@ -13,45 +13,72 @@ public class Heap {
         bubbleUp();
     }
 
-    public void remove() {
-        if(isEmpty()) {
+    public int remove() {
+        if(isEmpty())
             throw new IllegalStateException("Heap is empty");
-        } else if (this.size == 1) {
-            heap[0] = 0;
-            this.size--;
-        } else {
-            heap[0] = heap[this.size - 1];
-            heap[this.size - 1] = 0;
 
-            // bubble down
-            bubbleDown();
+        var root = heap[0];
 
-            this.size--;
-        }
+        heap[0] = heap[--size];
+
+       bubbleDown();
+
+        return root;
     }
 
     private void bubbleDown() {
-        int index = 0;
-        while (!isValidParent(index)) {
-            if(heap[index] < heap[leftChild(index)])
-                swap(index, leftChild(index));
-            else if (heap[index] < heap[rightChild(index)])
-                swap(index, (rightChild(index)));
-
-            index++;
+        var index = 0;
+        while(index <=  size && !isValidParent(index)) {
+            var largerChildIndex = largerChildIndex(index);
+            swap(index, largerChildIndex);
+            index = largerChildIndex;
         }
     }
 
-    private Boolean isValidParent(int index) {
-        return heap[index] >= heap[leftChild(index)] &&
-                heap[index] >= heap[rightChild(index)];
+    private int largerChildIndex(int index) {
+        if(!hasLeftChild(index))
+            return index;
+
+        if(!hasRightChild(index))
+            return leftChildIndex(index);
+
+        return (leftChild(index) > rightChild(index)) ?
+                leftChildIndex(index) : rightChildIndex(index);
     }
 
-    private int leftChild(int index) {
-        return (index * 2) + 1;
+    private Boolean hasLeftChild(int index) {
+        return leftChildIndex(index) <= size;
+    }
+
+    private Boolean hasRightChild(int index) {
+        return rightChildIndex(index) <= size;
     }
 
     private int rightChild(int index) {
+        return heap[rightChildIndex(index)];
+    }
+
+    private int leftChild(int index) {
+        return heap[leftChildIndex(index)];
+    }
+
+    private Boolean isValidParent(int index) {
+        if(!hasLeftChild(index))
+            return true;
+
+        var isValid = heap[index] >= heap[leftChildIndex(index)];
+
+        if(!hasRightChild(index))
+            isValid &= heap[index] >= heap[rightChild(index)];
+
+        return isValid;
+    }
+
+    private int leftChildIndex(int index) {
+        return (index * 2) + 1;
+    }
+
+    private int rightChildIndex(int index) {
         return (index * 2) + 2;
     }
 
