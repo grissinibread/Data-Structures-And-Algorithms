@@ -3,7 +3,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea/
-Heaps.iml
+Data-Structures-And-Algorithms.iml
 
 ### Eclipse ###
 .apt_generated
