@@ -28,6 +28,13 @@ public class Heap {
         return root;
     }
 
+    public int max() {
+        if(isEmpty())
+            throw new IllegalStateException("heaps.Heap is empty");
+
+        return this.heap[0];
+    }
+
     private void bubbleDown() {
         var index = 0;
         while(index <=  size && !isValidParent(index)) {
