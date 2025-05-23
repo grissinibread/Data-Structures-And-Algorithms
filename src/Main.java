@@ -10,8 +10,9 @@ public class Main {
 
         trie.insert("canada");
         trie.insert("can");
-        trie.insert("bread");
-        trie.insert("breast");
+
+//        trie.remove("can");
+        trie.remove("canada");
 
         trie.traverse();
     }

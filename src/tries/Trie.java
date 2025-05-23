@@ -1,6 +1,5 @@
 package tries;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Trie {
@@ -27,8 +26,16 @@ public class Trie {
             return children.get(ch);
         }
 
+        public TrieNode remove(char ch) {
+            return children.remove(ch);
+        }
+
         public TrieNode[] getChildern() {
             return children.values().toArray(new TrieNode[0]);
+        }
+
+        public Boolean hasChildren() {
+            return !children.isEmpty();
         }
 
         @Override
@@ -61,6 +68,30 @@ public class Trie {
         }
 
         return current.isEndOfWord;
+    }
+
+    public void remove(String word) {
+        if(word == null)
+            return;
+
+        remove(word, root, 0);
+    }
+
+    private void remove(String word, TrieNode root, Integer index) {
+        if(index == word.length()) {
+            root.isEndOfWord = false;
+            return;
+        }
+
+        var ch = word.charAt(index);
+        var child = root.getChild(ch);
+        if(child == null)
+            return;
+
+        remove(word, child, index + 1);
+
+        if(!child.hasChildren() && !child.isEndOfWord)
+            root.remove(ch);
     }
 
     public void traverse() {
