@@ -1,20 +1,17 @@
+import graphs.Graph;
 import heaps.Heap;
 import heaps.MaxHeap;
 import tries.Trie;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Trie trie = new Trie();
+        Graph graph = new Graph();
 
-        trie.insert("canada");
-        trie.insert("can");
+        graph.addNode("Booty");
+        graph.addNode("Cheeks");
 
-//        trie.remove("can");
-        trie.remove("canada");
-
-        trie.traverse();
+        graph.print();
     }
-
 }
