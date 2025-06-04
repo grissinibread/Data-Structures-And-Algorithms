@@ -1,9 +1,6 @@
 package graphs;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Graph {
     private static class Node {
@@ -69,5 +66,48 @@ public class Graph {
             return;
 
         adjacencyList.get(fromNode).remove(toNode);
+    }
+
+    public void traverseDepthFirstRec(String root) {
+        var node = nodes.get(root);
+        if(node == null)
+            return;
+
+        traverseDepthFirstRec(node, new HashSet<>());
+    }
+
+    private void traverseDepthFirstRec(Node root, Set<Node> visited) {
+        System.out.println(root);
+        visited.add(root);
+
+        for(var connection : adjacencyList.get(root)) {
+            if(!visited.contains(connection))
+                traverseDepthFirstRec(connection, visited);
+        }
+    }
+
+    public void traverseDepthFirst(String root) {
+        var node = nodes.get(root);
+        if(node == null)
+            return;
+
+        Set<Node> visited = new HashSet<>();
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+
+        while(!stack.isEmpty()) {
+            var current = stack.pop();
+
+            if(visited.contains(current))
+                continue;
+
+            System.out.println(current);
+            visited.add(current);
+
+            for(var neighbor : adjacencyList.get(current))
+                if(!visited.contains(neighbor))
+                    stack.push(neighbor);
+        }
     }
 }
