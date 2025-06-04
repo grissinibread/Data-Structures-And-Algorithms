@@ -1,6 +1,8 @@
 package tries;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Trie {
     public static int ALPHABET_SIZE = 26;
@@ -104,4 +106,36 @@ public class Trie {
 
         System.out.println(root.value);
     }
+
+    public List<String> findWords(String prefix) {
+        List<String> words = new ArrayList<>();
+        var lastNode = findLastNodeOf(prefix);
+        findWords(lastNode, prefix, words);
+
+        return words;
+    }
+
+    private void findWords(TrieNode root, String prefix, List<String> words) {
+        if(root == null)
+            return;
+
+        if(root.isEndOfWord)
+            words.add(prefix);
+
+        for (var child: root.getChildern())
+            findWords(child, prefix + child.value, words);
+    }
+
+    private TrieNode findLastNodeOf(String prefix) {
+        var current = root;
+        for(var ch : prefix.toCharArray()) {
+            var child = current.getChild(ch);
+            if(child == null)
+                return null;
+
+            current = child;
+        }
+        return current;
+    }
+
 }
