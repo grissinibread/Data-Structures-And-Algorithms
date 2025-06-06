@@ -1,21 +1,15 @@
 import graphs.Graph;
 import graphs.WeightedGraph;
+import sortingAlgorithms.BubbleSort;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        var graph = new WeightedGraph();
+        int[] numbers = { 7, 3, 1, 4, 6, 2, 3};
+        var sorter = new BubbleSort();
+        sorter.sort(numbers);
 
-        graph.addNode("A");
-        graph.addNode("B");
-        graph.addNode("C");
-        graph.addNode("D");
-        graph.addEdge("A", "B", 3);
-        graph.addEdge("B", "D", 4);
-        graph.addEdge("C", "D", 5);
-        graph.addEdge("A", "C", 1);
-        graph.addEdge("B", "C", 2);
-
-        var tree = graph.getMinimumSpanningTree();
-        tree.print();
+        System.out.println(Arrays.toString(numbers));
     }
 }
