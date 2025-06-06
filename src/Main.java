@@ -1,27 +1,17 @@
 import graphs.Graph;
-import heaps.Heap;
-import heaps.MaxHeap;
-import tries.Trie;
-
-import java.util.*;
+import graphs.WeightedGraph;
 
 public class Main {
     public static void main(String[] args) {
-        Graph graph = new Graph();
+        var graph = new WeightedGraph();
 
-        graph.addNode("Booty");
-        graph.addNode("Cheeks");
-        graph.addNode("on");
-        graph.addNode("a");
-        graph.addNode("Cob");
+        graph.addNode("A");
+        graph.addNode("B");
+        graph.addNode("C");
+        graph.addEdge("A", "B", 1);
+        graph.addEdge("B", "C", 2);
+        graph.addEdge("A", "C", 10);
 
-        graph.addEdge("Booty", "Cheeks");
-        graph.addEdge("Booty", "on");
-        graph.addEdge("Booty", "a");
-        graph.addEdge("Booty", "Cob");
-
-        graph.traverseDepthFirst("Booty");
-
-        graph.print();
+        System.out.println(graph.getShortestPath("A", "C"));
     }
 }
